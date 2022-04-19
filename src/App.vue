@@ -3,7 +3,7 @@ import { ref, watch } from 'vue'
 import { useMagicKeys, whenever } from '@vueuse/core'
 import CommandPalette from './components/CommandPalette.vue'
 
-const displayCommandPalette = ref(false)
+const displayCommandPalette = ref(true)
 const keys = useMagicKeys()
 
 whenever(keys.cmd_k, () => {
