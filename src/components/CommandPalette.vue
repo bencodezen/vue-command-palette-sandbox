@@ -1,14 +1,44 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { useMagicKeys, whenever } from '@vueuse/core'
 import { commandList } from '../features/commands'
 
+const props = defineProps({
+  displayed: {
+    type: Boolean,
+    default: true
+  }
+})
+
+const keys = useMagicKeys()
 const commandFilterText = ref('')
+const hoverItemIndex = ref(0)
 
 const commandListFiltered = computed(() => {
   const filterText = commandFilterText.value.toLowerCase()
   return commandList.value.filter(command => {
     return command.title.toLowerCase().includes(filterText)
   })
+})
+
+whenever(keys.down, () => {
+  if (props.displayed) {
+    if (hoverItemIndex.value < commandListFiltered.value.length - 1) {
+      hoverItemIndex.value++
+    } else {
+      hoverItemIndex.value = 0
+    }
+  }
+})
+
+whenever(keys.up, () => {
+  if (props.displayed) {
+    if (hoverItemIndex.value > 0) {
+      hoverItemIndex.value--
+    } else {
+      hoverItemIndex.value = commandListFiltered.value.length - 1
+    }
+  }
 })
 </script>
 
@@ -18,9 +48,10 @@ const commandListFiltered = computed(() => {
     <input type="text" v-model="commandFilterText" />
     <ul>
       <li
-        v-for="command in commandListFiltered"
+        v-for="(command, index) in commandListFiltered"
         :key="command.id"
         @click="command.command"
+        :class="index === hoverItemIndex ? 'is-hovered' : ''"
       >
         {{ command.title }}
       </li>
@@ -28,4 +59,8 @@ const commandListFiltered = computed(() => {
   </div>
 </template>
 
-<style></style>
+<style>
+.is-hovered {
+  background-color: #eee;
+}
+</style>
