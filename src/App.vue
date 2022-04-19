@@ -15,7 +15,7 @@ whenever(keys.cmd_k, () => {
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
   <CommandPalette
-    v-if="displayCommandPalette"
+    v-show="displayCommandPalette"
     :displayed="displayCommandPalette"
   />
   <Counter />
