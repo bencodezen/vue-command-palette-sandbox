@@ -21,6 +21,10 @@ const commandListFiltered = computed(() => {
   })
 })
 
+const selectedCommand = computed(() => {
+  return commandListFiltered.value[hoverItemIndex.value]
+})
+
 whenever(keys.down, () => {
   if (props.displayed) {
     if (hoverItemIndex.value < commandListFiltered.value.length - 1) {
@@ -37,6 +41,16 @@ whenever(keys.up, () => {
       hoverItemIndex.value--
     } else {
       hoverItemIndex.value = commandListFiltered.value.length - 1
+    }
+  }
+})
+
+whenever(keys.enter, () => {
+  if (props.displayed) {
+    if (selectedCommand.value.command) {
+      selectedCommand.value.command()
+    } else {
+      console.log('No command')
     }
   }
 })
