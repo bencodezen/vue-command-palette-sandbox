@@ -1,14 +1,29 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useMagicKeys, whenever } from '@vueuse/core'
+import { commandList } from './features/commands'
 import CommandPalette from './components/CommandPalette.vue'
 import Counter from './components/Counter.vue'
 
 const displayCommandPalette = ref(true)
 const keys = useMagicKeys()
 
+console.log(commandList.value)
+
 whenever(keys.cmd_k, () => {
   displayCommandPalette.value = !displayCommandPalette.value
+})
+
+commandList.value.forEach(item => {
+  if (item.hotkeys.length > 0) {
+    item.hotkeys.forEach(hotkey => {
+      whenever(keys[hotkey], () => {
+        if (item.command) {
+          item.command()
+        }
+      })
+    })
+  }
 })
 </script>
 

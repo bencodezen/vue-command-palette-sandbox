@@ -6,7 +6,7 @@ export const commandList = ref([
     id: 123,
     title: 'Increment count',
     alias: [],
-    hotkeys: ['Cmd_Shift_C'],
+    hotkeys: ['Cmd_Shift_O'],
     command: counter.incrementCount
   },
   {
