@@ -78,15 +78,23 @@ whenever(keys.enter, () => {
         v-for="(command, index) in commandListFiltered"
         :key="command.id"
         @click="command.command"
+        class="command-list-item"
         :class="index === hoverItemIndex ? 'is-hovered' : ''"
       >
-        {{ command.title }}
+        <span>{{ command.title }}</span>
+        <span>{{ command.hotkeys }}</span>
       </li>
     </ul>
   </div>
 </template>
 
 <style>
+.command-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
 .is-hovered {
   background-color: #eee;
 }
