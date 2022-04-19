@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { useMagicKeys, whenever } from '@vueuse/core'
 import { commandList } from '../features/commands'
 
@@ -13,6 +13,7 @@ const props = defineProps({
 const keys = useMagicKeys()
 const commandFilterText = ref('')
 const hoverItemIndex = ref(0)
+const elFilterInput = ref(null)
 
 const commandListFiltered = computed(() => {
   const filterText = commandFilterText.value.toLowerCase()
@@ -23,6 +24,13 @@ const commandListFiltered = computed(() => {
 
 const selectedCommand = computed(() => {
   return commandListFiltered.value[hoverItemIndex.value]
+})
+
+watch(props, async cv => {
+  if (props.displayed) {
+    await nextTick()
+    elFilterInput.value.focus()
+  }
 })
 
 whenever(keys.down, () => {
@@ -59,7 +67,12 @@ whenever(keys.enter, () => {
 <template>
   <div class="command-palette">
     <h1>My Command Palette</h1>
-    <input type="text" v-model="commandFilterText" />
+    <input
+      ref="elFilterInput"
+      type="text"
+      v-model="commandFilterText"
+      autofocus
+    />
     <ul>
       <li
         v-for="(command, index) in commandListFiltered"
