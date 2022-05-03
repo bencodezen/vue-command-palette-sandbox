@@ -4,6 +4,7 @@ import { useMagicKeys, whenever } from '@vueuse/core'
 import { commandList } from './features/commands'
 import CommandPalette from './components/CommandPalette.vue'
 import Counter from './components/Counter.vue'
+import Todo from './components/Todo.vue'
 
 const displayCommandPalette = ref(false)
 const keys = useMagicKeys()
@@ -34,6 +35,7 @@ commandList.value.forEach(item => {
     :displayed="displayCommandPalette"
   />
   <Counter />
+  <Todo />
 </template>
 
 <style>
