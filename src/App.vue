@@ -3,8 +3,6 @@ import { ref, watch } from 'vue'
 import { useMagicKeys, whenever } from '@vueuse/core'
 import { useCommandStore } from './stores/CommandStore'
 import CommandPalette from './components/CommandPalette.vue'
-import Counter from './components/Counter.vue'
-import Todo from './components/Todo.vue'
 
 const displayCommandPalette = ref(false)
 const keys = useMagicKeys()
@@ -36,12 +34,11 @@ commandStore.commandList.forEach(item => {
 
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
+  <router-view />
   <CommandPalette
     v-show="displayCommandPalette"
     :displayed="displayCommandPalette"
   />
-  <Counter />
-  <Todo />
 </template>
 
 <style>
