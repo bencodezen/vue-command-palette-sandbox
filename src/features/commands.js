@@ -7,6 +7,7 @@ export const register = config => {
   commandStore.commandList.push({
     id: uuidv4(),
     title: config.name,
-    command: config.function
+    command: config.function,
+    aliasList: []
   })
 }

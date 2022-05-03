@@ -19,7 +19,7 @@ const elFilterInput = ref(null)
 
 const commandListFiltered = computed(() => {
   const filterText = commandFilterText.value.toLowerCase()
-  return commandStore.commandList.filter(command => {
+  return commandStore.completeList.filter(command => {
     return command.title.toLowerCase().includes(filterText)
   })
 })
@@ -85,7 +85,11 @@ whenever(keys.enter, () => {
           class="command-list-item"
           :class="index === hoverItemIndex ? 'is-hovered' : ''"
         >
-          <span>{{ command.title }}</span>
+          <span
+            >{{ command.title }}<br /><span style="font-size: 0.8rem">{{
+              command.origin
+            }}</span></span
+          >
           <span>{{ command.hotkeys }}</span>
         </li>
       </ul>
