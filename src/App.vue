@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useMagicKeys, whenever } from '@vueuse/core'
-import { commandList } from './features/commands'
+import { useCommandStore } from './stores/CommandStore'
 import CommandPalette from './components/CommandPalette.vue'
 import Counter from './components/Counter.vue'
 import Todo from './components/Todo.vue'
@@ -9,13 +9,13 @@ import Todo from './components/Todo.vue'
 const displayCommandPalette = ref(false)
 const keys = useMagicKeys()
 
-console.log(commandList.value)
+const commandStore = useCommandStore()
 
 whenever(keys.cmd_k, () => {
   displayCommandPalette.value = !displayCommandPalette.value
 })
 
-commandList.value.forEach(item => {
+commandStore.commandList.forEach(item => {
   if (item.hotkeys.length > 0) {
     item.hotkeys.forEach(hotkey => {
       whenever(keys[hotkey], () => {

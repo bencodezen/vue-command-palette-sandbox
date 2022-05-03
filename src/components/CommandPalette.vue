@@ -1,7 +1,7 @@
 <script setup>
 import { computed, nextTick, ref, watch } from 'vue'
 import { useMagicKeys, whenever } from '@vueuse/core'
-import { commandList } from '../features/commands'
+import { useCommandStore } from '../stores/CommandStore'
 
 const props = defineProps({
   displayed: {
@@ -10,6 +10,8 @@ const props = defineProps({
   }
 })
 
+const commandStore = useCommandStore()
+
 const keys = useMagicKeys()
 const commandFilterText = ref('')
 const hoverItemIndex = ref(0)
@@ -17,7 +19,7 @@ const elFilterInput = ref(null)
 
 const commandListFiltered = computed(() => {
   const filterText = commandFilterText.value.toLowerCase()
-  return commandList.value.filter(command => {
+  return commandStore.commandList.filter(command => {
     return command.title.toLowerCase().includes(filterText)
   })
 })
