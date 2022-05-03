@@ -65,30 +65,66 @@ whenever(keys.enter, () => {
 </script>
 
 <template>
-  <div class="command-palette">
-    <h1>My Command Palette</h1>
-    <input
-      ref="elFilterInput"
-      type="text"
-      v-model="commandFilterText"
-      autofocus
-    />
-    <ul>
-      <li
-        v-for="(command, index) in commandListFiltered"
-        :key="command.id"
-        @click="command.command"
-        class="command-list-item"
-        :class="index === hoverItemIndex ? 'is-hovered' : ''"
-      >
-        <span>{{ command.title }}</span>
-        <span>{{ command.hotkeys }}</span>
-      </li>
-    </ul>
+  <div class="command-palette-overlay">
+    <section class="command-palette">
+      <input
+        class="command-palette-input"
+        ref="elFilterInput"
+        type="text"
+        v-model="commandFilterText"
+        placeholder="Select a command..."
+        autofocus
+      />
+      <ul class="command-palette-list">
+        <li
+          v-for="(command, index) in commandListFiltered"
+          :key="command.id"
+          @click="command.command"
+          class="command-list-item"
+          :class="index === hoverItemIndex ? 'is-hovered' : ''"
+        >
+          <span>{{ command.title }}</span>
+          <span>{{ command.hotkeys }}</span>
+        </li>
+      </ul>
+    </section>
   </div>
 </template>
 
 <style>
+.command-palette {
+  position: relative;
+  width: 80%;
+  max-height: 80%;
+  margin-top: 30px;
+  border-radius: 6px;
+  padding: 10px;
+  background-color: white;
+}
+
+.command-palette-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.command-palette-list {
+  margin: 0;
+  padding: 0;
+}
+
+.command-palette-overlay {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
 .command-list-item {
   display: flex;
   justify-content: space-between;
