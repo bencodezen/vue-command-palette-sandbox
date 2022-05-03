@@ -11,6 +11,12 @@ const keys = useMagicKeys()
 
 const commandStore = useCommandStore()
 
+whenever(keys.Escape, () => {
+  if (displayCommandPalette.value) {
+    displayCommandPalette.value = false
+  }
+})
+
 whenever(keys.cmd_k, () => {
   displayCommandPalette.value = !displayCommandPalette.value
 })
