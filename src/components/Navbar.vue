@@ -4,6 +4,7 @@
   <nav class="navbar">
     <ul class="navbar-list">
       <li><router-link to="/">Home</router-link></li>
+      <li><router-link to="/todo">Todo</router-link></li>
       <li><router-link to="/commands">Commands</router-link></li>
     </ul>
   </nav>
