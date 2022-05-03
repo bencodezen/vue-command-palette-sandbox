@@ -5,7 +5,7 @@ import { commandList } from './features/commands'
 import CommandPalette from './components/CommandPalette.vue'
 import Counter from './components/Counter.vue'
 
-const displayCommandPalette = ref(true)
+const displayCommandPalette = ref(false)
 const keys = useMagicKeys()
 
 console.log(commandList.value)

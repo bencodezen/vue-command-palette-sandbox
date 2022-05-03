@@ -1,14 +1,14 @@
 import { ref } from 'vue'
-import counter from './counter'
+
+export const register = config => {
+  commandList.value.push({
+    id: 357,
+    title: config.name,
+    command: config.function
+  })
+}
 
 export const commandList = ref([
-  {
-    id: 123,
-    title: 'Increment count',
-    alias: [],
-    hotkeys: ['Cmd_Shift_O'],
-    command: counter.incrementCount
-  },
   {
     id: 456,
     title: 'Command Karaage 2',
