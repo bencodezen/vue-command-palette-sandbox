@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import { useMagicKeys, whenever } from '@vueuse/core'
 import { useCommandStore } from './stores/CommandStore'
 import CommandPalette from './components/CommandPalette.vue'
+import Navbar from './components/Navbar.vue'
 
 const displayCommandPalette = ref(false)
 const keys = useMagicKeys()
@@ -33,6 +34,7 @@ commandStore.commandList.forEach(item => {
 </script>
 
 <template>
+  <Navbar />
   <img alt="Vue logo" src="./assets/logo.png" />
   <router-view />
   <CommandPalette
@@ -52,6 +54,5 @@ commandStore.commandList.forEach(item => {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
